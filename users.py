@@ -184,24 +184,21 @@ def usersList(name, password):
                         with open('scores.txt', 'r') as score_file:
                             list_sessions = []
                             for line in score_file:
-                                name, current_score = line.strip().split
-                                if name in connected_users:  # Verificar si el usuario está conectado
-                                    list_sessions.append((name, current_score))  # Guardar nombre y puntaje
+                                username, current_score = line.strip().split()
+                                if username in connected_users:  # Verificar si el usuario está conectado
+                                    list_sessions.append((username, current_score))  # Guardar nombre y puntaje
                                 # Retornar la lista de usuarios conectados y sus puntajes
-                                return  list_sessions 
+                                return  list_sessions
                             else:
                                 return "error"  # No hay puntajes para usuarios conectados
 
                     except FileNotFoundError:
                         return "error"  # El archivo no existe
-
+                    
         return "error"  # Usuario no encontrado o contraseña incorrecta
 
     except FileNotFoundError:
         return "error"  # El archivo de usuarios no existe
-
-
- 
 
 # Función que genera una pregunta en una categoría cat
 # retorna la pregunta si el nombre de usuario y la contraseña son correctos y si el usuario se encuentra con sesión abierta
@@ -219,25 +216,25 @@ def question(name, password, cat):
                     try:
                         with open('sessions.txt', 'r') as session_file:
                             if name not in session_file.read().splitlines():
-                                return "error"  # El usuario no tiene sesión abierta
+                                return "error de usuario"  # El usuario no tiene sesión abierta
                     except FileNotFoundError:
-                        return "error"  # No hay sesiones
+                        return "error 1"  # No hay sesiones
 
                     # Leer las preguntas de la categoría especificada
                     try:
                         with open(f'questions_{cat}.txt', 'r') as question_file:
                             questions = question_file.readlines()
                             if not questions:
-                                return "error"  # No hay preguntas en esta categoría
+                                return "error 2"  # No hay preguntas en esta categoría
 
                             # Elegir una pregunta aleatoria
                             question_line = choice(questions).strip()
-                            return question_line  # Retornar la pregunta seleccionada
+                            return  f"{(question_line)}" # Retornar la pregunta seleccionada
 
                     except FileNotFoundError:
-                        return "error"  # No existe el archivo de questions
+                        return "error 3"  # No existe el archivo de questions
 
-        return "error"  # Usuario no encontrado o contraseña incorrecta
+        return "error 4"  # Usuario no encontrado o contraseña incorrecta
 
     except FileNotFoundError:
-        return "error"  # El archivo de usuarios no existe
+        return "error 5"  # El archivo de usuarios no existe
